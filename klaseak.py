@@ -258,7 +258,7 @@ class DescriptionList():
         return self.zerrenda[dId]
 
 
-#SNOMED CT-ko deskribapenak kudeatzeko objektua 
+#SNOMED CT-ko erlazioak kudeatzeko objektua 
 class RelationshipList():
     #fitxategitik informazioa jaso eta egituratuta gordetzeko
     def erlazioaJaso(self,line):
@@ -306,7 +306,7 @@ class RelationshipList():
                         helmugaSet.add(r["conceptId1"])
                         self.umeZerrenda[r["conceptId2"]] = helmugaSet
 
-
+    #kontzeptuak hierarkiaka banatzeko funtzio errekurtsiboa
     def jasoErrek(self,setOna,hie):
         if setOna:
             if hie == "FINDING" and "64572001" in setOna:
@@ -363,8 +363,9 @@ class RelationshipList():
                 irt.append(self.hierarkiak[sid])
         return irt
 
-
+#SNOMED CT-ko language fitxategiko informazioa kudeatzeko objektua 
 class LanguageList():
+    #fitxategitik informazioa jaso eta egituratuta gordetzeko
     def languageJaso(self,line):#,lan):
         eremuak = line.strip().split('\t')
         language = {}
@@ -374,7 +375,8 @@ class LanguageList():
             language["acceptabilityId"] = eremuak[6]
             language["refset"] = eremuak[4]
         return language
-    
+
+    #objektuaren hasieratzailea, fitxategitik
     def __init__(self,fitx):
         self.zerrenda = {}
         if "Spanish" in fitx:
